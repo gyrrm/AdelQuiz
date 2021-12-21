@@ -48,13 +48,12 @@ class ResultFragment : Fragment() {
             R.layout.fragment_result,container,false)
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
-        myPlayer = Player(args.playerName, args.playerScore)
 
-        binding.tvResultMessage.text = "Congrats " + myPlayer.name + "!"
-        val numberOfTotalQuestion = 5
-        val numberOfCorrectQuestion = myPlayer.score
+        val userEntity: UserEntity = (activity as MainActivity).getFromDatabaseByName(args.playerName)
 
-        binding.tvScore.text = "You scored ${myPlayer.score} out of 5"
+        binding.tvResultMessage.text = "Congrats " + userEntity.userName + "!"
+
+        binding.tvScore.text = "You scored ${userEntity.userScore} out of 5"
 
         binding.againButton.setOnClickListener{view: View->
             view.findNavController().navigate(ResultFragmentDirections.actionResultFragmentToQuizFragment(args.playerName))

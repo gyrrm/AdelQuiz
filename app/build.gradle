@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
-apply plugin: 'kotlin-kapt'
-
 apply plugin: 'androidx.navigation.safeargs'
+
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 31
@@ -55,4 +55,8 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation "androidx.room:room-ktx:2.2.4"
+    implementation 'android.arch.persistence.room:testing:1.0.0'
+    implementation 'androidx.room:room-runtime:2.3.0'
+    kapt 'androidx.room:room-compiler:2.2.4'
 }

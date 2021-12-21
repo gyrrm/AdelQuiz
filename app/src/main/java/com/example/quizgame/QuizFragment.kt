@@ -185,6 +185,11 @@ class QuizFragment : Fragment() {
 
                     if (viewModel.roundCounter == viewModel.maxRoundNumber) {
                         binding.btnAnswerButton.text = "FINISH QUIZ"
+                        if((activity as MainActivity).getFromDatabaseByName(viewModel.myPlayer.name) != null) {
+                            (activity as MainActivity).updateUserEntity(viewModel.myPlayer.name, viewModel.myPlayer.score.toString())
+                        } else {
+                            (activity as MainActivity).saveDatabase(viewModel.myPlayer.name, viewModel.myPlayer.score.toString())
+                        }
                     } else {
                         binding.btnAnswerButton.text = "NEXT QUESTION"
                     }

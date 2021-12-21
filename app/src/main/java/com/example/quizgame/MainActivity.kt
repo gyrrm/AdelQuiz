@@ -1,11 +1,15 @@
 package com.example.quizgame
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import com.example.quizgame.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -31,5 +35,38 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.myNavHostFragment)
         return navController.navigateUp()
+    }
+
+    fun saveDatabase(userName: String, userScore: String) {
+
+        var db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "userDatabase"
+        ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
+
+        val userDao = db.userDao()
+        userDao.insert(UserEntity( userName, userScore))
+    }
+
+    fun getFromDatabaseByName(userName: String): UserEntity {
+
+        var db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "userDatabase"
+        ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
+
+        val userDao = db.userDao()
+        return userDao.getUserByUserName(userName)
+    }
+
+    fun updateUserEntity(userName: String, userScore: String) {
+
+        var db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "userDatabase"
+        ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
+
+        val userDao = db.userDao()
+        userDao.update(userName, userScore)
     }
 }

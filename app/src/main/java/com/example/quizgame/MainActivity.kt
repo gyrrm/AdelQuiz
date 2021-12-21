@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity() {
         ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
 
         val userDao = db.userDao()
-        userDao.insert(UserEntity( userName, userScore))
+        UserRepository(userDao).addUser(UserEntity(userName, userScore))
+        //userDao.insert(UserEntity( userName, userScore))
     }
 
     fun getFromDatabaseByName(userName: String): UserEntity {
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
 
         val userDao = db.userDao()
-        return userDao.getUserByUserName(userName)
+        return UserRepository(userDao).getUser(userName)
     }
 
     fun updateUserEntity(userName: String, userScore: String) {
@@ -67,6 +68,6 @@ class MainActivity : AppCompatActivity() {
         ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
 
         val userDao = db.userDao()
-        userDao.update(userName, userScore)
+        UserRepository(userDao).updateUser(userName, userScore)
     }
 }

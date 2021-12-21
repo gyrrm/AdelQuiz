@@ -1,7 +1,7 @@
-package com.university.homework.adelquiz
+package com.example.quizgame
 
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import android.support.test.InstrumentationRegistry
+import android.support.test.runner.AndroidJUnit4
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.university.homework.adelquiz", appContext.packageName)
+        assertEquals("com.example.quizgame", appContext.packageName)
     }
 }

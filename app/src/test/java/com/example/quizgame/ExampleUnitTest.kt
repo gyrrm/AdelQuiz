@@ -1,4 +1,4 @@
-package com.university.homework.adelquiz
+package com.example.quizgame
 
 import org.junit.Test
 
